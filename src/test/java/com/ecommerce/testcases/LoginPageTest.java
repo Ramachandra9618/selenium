@@ -3,10 +3,10 @@ package com.ecommerce.testcases;
 import com.ecommerce.base.BaseClass;
 import com.ecommerce.pageObjects.LandingPage;
 import com.ecommerce.pageObjects.LoginPage;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -18,9 +18,6 @@ public class LoginPageTest extends BaseClass {
 
     LandingPage landingPage;
     LoginPage loginPage;
-
-
-
 
     @ParameterizedTest
     @Tag("FunctionalTest")
@@ -36,7 +33,6 @@ public class LoginPageTest extends BaseClass {
     }
 
 
-
     @Test
     @Tag("RegressionTest")
     @DisplayName("Test Terms of Use Link on Login Page")
@@ -47,8 +43,6 @@ public class LoginPageTest extends BaseClass {
         String url = loginPage.clickTerm();
         Assertions.assertEquals("https://www.flipkart.com/account/login?ret=/", url);
     }
-
-
 
 
     @ParameterizedTest

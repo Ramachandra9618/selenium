@@ -2,7 +2,6 @@ package com.ecommerce.pageObjects;
 
 import com.ecommerce.actiondriver.Action;
 import com.ecommerce.base.BaseClass;
-import com.ecommerce.base.GridSetUp;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,16 +12,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 
-public class LandingPage extends GridSetUp {
+public class LandingPage extends BaseClass {
 
 
-    private WebDriver driver;
+    public WebDriver driver;
     public LandingPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    WebDriverWait wait =new WebDriverWait(driver, Duration.ofSeconds(20));
     Action action = new Action();
     @FindBy(how = How.XPATH, using = "//img[@title='Flipkart']")  WebElement logo;
     @FindBy(how = How.XPATH, using = "//span[normalize-space()='Login']") WebElement login;
@@ -31,8 +29,7 @@ public class LandingPage extends GridSetUp {
     @FindBy(how = How.XPATH, using = "//button[@type='submit']//*[name()='svg']") WebElement searchButton;
     @FindBy(how = How.XPATH, using = "//span[@class='_1Mikcj']")WebElement signUp;
     @FindBy(how = How.XPATH, using = "//ul[@class='_3YjYK7 ecs1XG']//a") WebElement dropDown;
-
-
+    @FindBy(how = How.LINK_TEXT, using = "Travel") WebElement flight;
 
 
 
@@ -77,5 +74,9 @@ public class LandingPage extends GridSetUp {
     public void mouseOn(){
         action.moveToElement(driver, login);
 
+    }
+
+    public void clickOnFlight(){
+        flight.click();
     }
 }

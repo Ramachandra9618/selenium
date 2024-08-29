@@ -4,9 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -23,9 +21,10 @@ public class BaseClass {
 
     protected static ExtentReports extentReports;
     protected static ExtentSparkReporter sparkReporter;
-    public WebDriver driver;
+    public static WebDriver driver;
     protected ExtentTest test;
     protected Properties prop;
+
 
 
     @BeforeEach
@@ -43,12 +42,11 @@ public class BaseClass {
             String timestamp = LocalDateTime.now().format(formatter);
             String reportFileName = String.format("testReport_%s.html", timestamp);
             extentReports = new ExtentReports();
-            sparkReporter = new ExtentSparkReporter("/home/chandra/Documents/Ecomerace-selenium/testReports" + reportFileName);
+            sparkReporter = new ExtentSparkReporter("testReports/" + reportFileName);
             extentReports.attachReporter(sparkReporter);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         // Create a new ExtentTest for each test method
         test = extentReports.createTest(testInfo.getDisplayName(), "Test case: " + testInfo.getTestMethod().orElseThrow().getName());
@@ -57,19 +55,19 @@ public class BaseClass {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
         driver.get("https://www.flipkart.com");
     }
+
 
     @AfterEach
     void tearDown() {
         // Close the WebDriver
         if (driver != null) {
-            driver.quit();
+//            driver.quit();
         }
-
-        // Flush and close ExtentReports
         extentReports.flush();
     }
+
 }
